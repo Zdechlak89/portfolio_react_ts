@@ -1,0 +1,21 @@
+header {
+  nav {
+    top: 64px;
+    left: 64px;
+    position: fixed;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+  div {
+    bottom: 64px;
+    left: 64px;
+    position: fixed;
+    writing-mode: vertical-lr;
+    text-orientation: mixed;
+  }
+  .mode {
+    top: 64px;
+    right: 64px;
+    position: fixed;
+  }
+}
