@@ -3,11 +3,10 @@ import { useContext } from "react";
 import { ModeContext } from "../store/app-context";
 
 function Header() {
-  const { themeMode, setThemeMode } = useContext(ModeContext);
+  const { darkMode, setDarkMode } = useContext(ModeContext);
 
-  const switchThemeMode = () => {
-    const modeClass = themeMode === "light" ? "dark" : "light";
-    setThemeMode(modeClass);
+  const switchDarkMode = () => {
+    setDarkMode(darkMode ? false : true);
   };
 
   return (
@@ -19,8 +18,8 @@ function Header() {
           <a href="#">Link</a>
         </nav>
         <button
-          className={`mode ` + themeMode}
-          onClick={switchThemeMode}
+          className={`mode ` + darkMode}
+          onClick={switchDarkMode}
         ></button>
         <div>
           <a href="#">Link</a>

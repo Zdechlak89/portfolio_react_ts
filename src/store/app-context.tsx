@@ -1,11 +1,11 @@
 import { createContext } from "react";
 
 const ModeContext = createContext<{
-  themeMode: string;
-  setThemeMode: (name: string) => void;
+  darkMode: boolean;
+  setDarkMode: (name: boolean) => void;
 }>({
-  themeMode: "light",
-  setThemeMode: () => {},
+  darkMode: false,
+  setDarkMode: () => {},
 });
 
 export { ModeContext };
