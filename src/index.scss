@@ -1,5 +1,27 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("./assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
+    format("truetype");
+}
+
+@font-face {
+  font-family: "Hindi";
+  src: url("./assets/fonts/Hind/Hind-Bold.ttf") format("truetype");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Hindi";
+  src: url("./assets/fonts/Hind/Hind-Medium.ttf") format("truetype");
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Hindi";
+  src: url("./assets/fonts/Hind/Hind-Light.ttf") format("truetype");
+  font-weight: 100;
+}
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Hindi, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -50,6 +72,16 @@ body {
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+}
+
+h1,
+h2 {
+  font-family: Montserrat;
+  font-weight: 600;
+}
+h3 {
+  font-family: Hindi;
+  font-weight: 500;
 }
 
 button {
