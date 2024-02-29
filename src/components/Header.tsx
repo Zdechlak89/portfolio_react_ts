@@ -1,6 +1,8 @@
 import "./Header.scss";
 import { useContext } from "react";
 import { ModeContext } from "../store/app-context";
+import Link from "./Link";
+import ModeButton from "./ModeButton";
 
 function Header() {
   const { darkMode, setDarkMode } = useContext(ModeContext);
@@ -13,14 +15,15 @@ function Header() {
     <>
       <header>
         <nav className="">
-          <a href="#">Link</a>
-          <a href="#">Link</a>
-          <a href="#">Link</a>
+          <Link href="#">Link</Link>
+          <Link href="#">Link</Link>
+          <Link href="#">Link</Link>
+          <Link href="#">Link</Link>
         </nav>
-        <button
+        <ModeButton
           className={`mode ` + darkMode}
           onClick={switchDarkMode}
-        ></button>
+        ></ModeButton>
         <div>
           <a href="#">Link</a>
           <a href="#">Link</a>
