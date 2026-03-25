@@ -35,7 +35,6 @@
   -moz-osx-font-smoothing: grayscale;
 }
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   text-align: center;
 }
@@ -44,11 +43,13 @@
 }
 a {
   font-weight: 500;
-  color: #646cff;
+  color: rgb(0, 0, 0);
   text-decoration: inherit;
+  margin: 0.3rem 0;
+  padding: 0.2rem;
 }
 a:hover {
-  color: #535bf2;
+  color: #00bfff;
 }
 
 body {
@@ -67,29 +68,42 @@ body {
     transition: all 0.5s ease-out;
 
     a {
-      font-weight: 500;
-      color: #09ff00;
-      text-decoration: inherit;
+      color: #ffffff;
     }
     a:hover {
-      color: #535bf2;
+      color: #00bfff;
     }
   }
 }
 
 h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  line-height: 0.8;
+  font-size: 10vw;
+  text-align: justify;
+  margin: 0.2em 0;
+}
+
+h2 {
+  font-size: 5vw;
+  text-align: justify;
+  margin: 0.2em 0;
+}
+
+h3 {
+  font-size: 2vw;
+  margin: 0 2vw 0 0;
+  color: #00bfff;
+}
+
+p {
+  font-size: 1vw;
 }
 
 h1,
-h2 {
+h2,
+h3 {
   font-family: Montserrat;
   font-weight: 600;
-}
-h3 {
-  font-family: Hindi;
-  font-weight: 500;
 }
 
 button {
@@ -104,7 +118,7 @@ button {
   transition: border-color 0.25s;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #00bfff;
 }
 button:focus,
 button:focus-visible {
@@ -117,9 +131,27 @@ button:focus-visible {
     background-color: #ffffff;
   }
   a:hover {
-    color: #747bff;
+    color: #00bfff;
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+
+nav a {
+  font-size: 24px;
+}
+
+.main-text {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 10vh 170px 0;
+
+  p {
+    font-size: 2vw;
+    margin: 0 2vw 0 0;
+    color: #00bfff;
   }
 }
