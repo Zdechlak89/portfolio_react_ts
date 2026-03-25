@@ -4,20 +4,25 @@ const MainSection = () => {
   return (
     <>
       <main>
-        <Section>
-          <h1>Emil Augustynowicz</h1>
-          <h1>- Web Developer</h1>
-          <h1>- Photographer</h1>
+        <Section id="main">
+          <h1 className="main-heading">Emil Augustynowicz</h1>
+          <p>- Web Developer</p>
+          <p>- Photographer</p>
         </Section>
-        <Section>
-          <h2>Frontend Developer</h2>
-          <h2>Web Developer</h2>
-          <h2>Photographer</h2>
+        <Section id="story">
+          <h2>Story</h2>
+          <p>Web Developer</p>
+          <p>Photographer</p>
         </Section>
-        <Section>
-          <h2>Frontend Developer</h2>
-          <h2>Web Developer</h2>
-          <h2>Photographer</h2>
+        <Section id="skills">
+          <h2>Skills</h2>
+          <p>Web Developer</p>
+          <p>Photographer</p>
+        </Section>
+        <Section id="contact">
+          <h2>Contact</h2>
+          <p>Web Developer</p>
+          <p>Photographer</p>
         </Section>
       </main>
     </>

@@ -14,11 +14,11 @@ function Header() {
   return (
     <>
       <header>
-        <nav className="">
+        <nav>
+          <Link href="#main">Main</Link>
+          <Link href="#story">Story</Link>
           <Link href="#">Link</Link>
-          <Link href="#">Link</Link>
-          <Link href="#">Link</Link>
-          <Link href="#">Link</Link>
+          <Link href="#contact">Contact</Link>
         </nav>
         <ModeButton
           className={`mode ` + darkMode}
