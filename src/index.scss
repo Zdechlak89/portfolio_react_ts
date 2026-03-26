@@ -50,13 +50,13 @@ a {
 }
 a:hover {
   color: #00bfff;
+
+  & ~ a {
+  }
 }
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
   min-height: 100vh;
   background-color: #f3f3f3;
   color: #1a1a1a;
@@ -142,16 +142,26 @@ nav a {
   font-size: 24px;
 }
 
-.main-text {
-  display: flex;
-  align-items: flex-start;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 10vh 170px 0;
+.main {
+  &-text {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 10vh 170px 0;
+    z-index: 1;
 
-  p {
-    font-size: 2vw;
-    margin: 0 2vw 0 0;
-    color: #00bfff;
+    p {
+      font-size: 2vw;
+      margin: 0 2vw 0 0;
+      color: #00bfff;
+    }
+  }
+
+  &-image {
+    width: 33vw;
+    right: 7vw;
+    position: absolute;
+    top: 0;
   }
 }

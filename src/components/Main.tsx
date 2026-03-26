@@ -5,12 +5,16 @@ const MainSection = () => {
     <>
       <main>
         <Section id="main">
-          <div className="main-image"></div>
           <div className="main-text">
             <h1 className="main-heading">Emil Augustynowicz</h1>
             <p>Web Developer</p>
             <p>Photographer</p>
           </div>
+          <img
+            src="./public/DAD_0409.jpg"
+            className="main-image"
+            alt="Emil Augustynowicz photo"
+          />
         </Section>
         <Section id="story">
           <h2>Story</h2>
