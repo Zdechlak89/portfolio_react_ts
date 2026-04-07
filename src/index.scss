@@ -42,16 +42,22 @@
   box-sizing: border-box;
 }
 a {
+  transition: all 0.1s ease-out;
   font-weight: 500;
   color: rgb(0, 0, 0);
   text-decoration: inherit;
   margin: 0.3rem 0;
   padding: 0.2rem;
-}
-a:hover {
-  color: #00bfff;
 
-  & ~ a {
+  &:has(~ a:hover) {
+    color: #818181;
+  }
+  &:hover {
+    color: #00bfff;
+
+    & ~ a {
+      color: #818181;
+    }
   }
 }
 
