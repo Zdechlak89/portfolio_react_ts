@@ -112,40 +112,58 @@ const MainSection = () => {
     <>
       <main>
         <Section id="main" ref={mainSectionRef}>
-          <div className="main-text" ref={mainTextRef}>
-            <h1 className="main-heading">
-              {splitTextIntoWords("Emil Augustynowicz")}
-            </h1>
-            <p>Web Developer</p>
-            <p>Photographer</p>
+          <div className="container">
+            <div className="col col-lg-7">
+              <div className="main-text" ref={mainTextRef}>
+                <h1 className="main-heading">
+                  {splitTextIntoWords("Emil Augustynowicz")}
+                </h1>
+                <p>Web Developer</p>
+                <p>Photographer</p>
+              </div>
+            </div>
+            <div className="col col-lg-5">
+              <img
+                ref={mainImageRef}
+                src="./public/DAD_0409.jpg"
+                className="main-image"
+                alt="Emil Augustynowicz photo"
+              />
+            </div>
           </div>
-          <img
-            ref={mainImageRef}
-            src="./public/DAD_0409.jpg"
-            className="main-image"
-            alt="Emil Augustynowicz photo"
-          />
         </Section>
         <Section id="story">
-          <h2>Story</h2>
-          <h3>Web Developer</h3>
-          <p>Information about the Web Developer</p>
-          <h3>Photographer</h3>
-          <p>Information about the Photographer</p>
+          <div className="container">
+            <div className="col">
+              <h2>Story</h2>
+              <h3>Web Developer</h3>
+              <p>Information about the Web Developer</p>
+              <h3>Photographer</h3>
+              <p>Information about the Photographer</p>
+            </div>
+          </div>
         </Section>
         <Section id="skills">
-          <h2>Skills</h2>
-          <h3>Web Developer</h3>
-          <p>Information about the Web Developer's skills</p>
-          <h3>Photographer</h3>
-          <p>Information about the Photographer's skills</p>
+          <div className="container">
+            <div className="col">
+              <h2>Skills</h2>
+              <h3>Web Developer</h3>
+              <p>Information about the Web Developer's skills</p>
+              <h3>Photographer</h3>
+              <p>Information about the Photographer's skills</p>
+            </div>
+          </div>
         </Section>
         <Section id="contact">
-          <h2>Contact</h2>
-          <h3>Web Developer</h3>
-          <p>Contact information for Web Developer</p>
-          <h3>Photographer</h3>
-          <p>Contact information for Photographer</p>
+          <div className="container">
+            <div className="col">
+              <h2>Contact</h2>
+              <h3>Web Developer</h3>
+              <p>Contact information for Web Developer</p>
+              <h3>Photographer</h3>
+              <p>Contact information for Photographer</p>
+            </div>
+          </div>
         </Section>
       </main>
     </>
