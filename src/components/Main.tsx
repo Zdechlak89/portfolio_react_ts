@@ -1,12 +1,92 @@
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Section from "./Section";
+import { splitTextIntoWords } from "../utils/textAnimation";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MainSection = () => {
+  const mainTextRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!mainTextRef.current) return;
+
+    const heading = mainTextRef.current.querySelector("h1");
+    const paragraphs = mainTextRef.current.querySelectorAll("p");
+
+    if (!heading) return;
+
+    // Animate heading words from bottom to top
+    const headingWords = heading.querySelectorAll(".word");
+    const headingTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: mainTextRef.current,
+        start: "top center",
+        end: "top center",
+      },
+    });
+
+    headingWords.forEach((word) => {
+      gsap.set(word, {
+        opacity: 0,
+        y: 30,
+      });
+    });
+
+    headingWords.forEach((word) => {
+      headingTimeline.to(
+        word,
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        0
+      );
+    });
+
+    // Animate paragraph words from left to right
+    const paraTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: mainTextRef.current,
+        start: "top center",
+        end: "top center",
+      },
+    });
+
+    paragraphs.forEach((para) => {
+      gsap.set(para, {
+        opacity: 0,
+        x: -100,
+      });
+
+      paraTimeline.to(
+        para,
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.6,
+          ease: "power2.out",
+        },
+        1.2
+      );
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
+  }, []);
+
   return (
     <>
       <main>
         <Section id="main">
-          <div className="main-text">
-            <h1 className="main-heading">Emil Augustynowicz</h1>
+          <div className="main-text" ref={mainTextRef}>
+            <h1 className="main-heading">
+              {splitTextIntoWords("Emil Augustynowicz")}
+            </h1>
             <p>Web Developer</p>
             <p>Photographer</p>
           </div>
