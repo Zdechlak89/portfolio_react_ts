@@ -7,13 +7,18 @@ import { splitTextIntoWords } from "../utils/textAnimation";
 gsap.registerPlugin(ScrollTrigger);
 
 const MainSection = () => {
+  const mainSectionRef = useRef<HTMLElement>(null);
   const mainTextRef = useRef<HTMLDivElement>(null);
+  const mainImageRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!mainTextRef.current) return;
+    const section = mainSectionRef.current;
+    const textContainer = mainTextRef.current;
+    const image = mainImageRef.current;
+    if (!section || !textContainer || !image) return;
 
-    const heading = mainTextRef.current.querySelector("h1");
-    const paragraphs = mainTextRef.current.querySelectorAll("p");
+    const heading = textContainer.querySelector("h1");
+    const paragraphs = textContainer.querySelectorAll("p");
 
     if (!heading) return;
 
@@ -74,7 +79,31 @@ const MainSection = () => {
       );
     });
 
+    const textScroll = gsap.to(textContainer, {
+      y: -80,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
+    const imageScroll = gsap.to(image, {
+      y: -410,
+      ease: "none",
+      scrollTrigger: {
+        trigger: section,
+        start: "top top",
+        end: "bottom top",
+        scrub: 1,
+      },
+    });
+
     return () => {
+      textScroll.kill();
+      imageScroll.kill();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
@@ -82,7 +111,7 @@ const MainSection = () => {
   return (
     <>
       <main>
-        <Section id="main">
+        <Section id="main" ref={mainSectionRef}>
           <div className="main-text" ref={mainTextRef}>
             <h1 className="main-heading">
               {splitTextIntoWords("Emil Augustynowicz")}
@@ -91,6 +120,7 @@ const MainSection = () => {
             <p>Photographer</p>
           </div>
           <img
+            ref={mainImageRef}
             src="./public/DAD_0409.jpg"
             className="main-image"
             alt="Emil Augustynowicz photo"

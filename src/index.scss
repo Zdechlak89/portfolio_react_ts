@@ -153,6 +153,11 @@ nav a {
   margin-right: 0.15em;
 }
 
+#main {
+  position: relative;
+  overflow: hidden;
+}
+
 .main {
   &-text {
     display: flex;
@@ -160,7 +165,8 @@ nav a {
     flex-direction: row;
     flex-wrap: wrap;
     margin: 10vh 170px 0;
-    z-index: 1;
+    position: relative;
+    z-index: 2;
 
     p {
       font-size: 2vw;
@@ -173,6 +179,7 @@ nav a {
     width: 33vw;
     right: 7vw;
     position: absolute;
-    top: 0;
+    top: 0vh;
+    z-index: 1;
   }
 }
