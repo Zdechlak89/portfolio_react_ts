@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import LocomotiveScroll from "locomotive-scroll";
 import Section from "./Section";
+import VerticalContainer from "./VerticalContainer";
 import { splitTextIntoWords } from "../utils/textAnimation";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,7 +50,7 @@ const MainSection = () => {
           duration: 0.6,
           ease: "power2.out",
         },
-        0
+        0,
       );
     });
 
@@ -75,7 +77,7 @@ const MainSection = () => {
           duration: 0.6,
           ease: "power2.out",
         },
-        1.2
+        1.2,
       );
     });
 
@@ -136,10 +138,7 @@ const MainSection = () => {
           <div className="container">
             <div className="col">
               <h2>Story</h2>
-              <h3>Web Developer</h3>
-              <p>Information about the Web Developer</p>
-              <h3>Photographer</h3>
-              <p>Information about the Photographer</p>
+              <VerticalContainer />
             </div>
           </div>
         </Section>
