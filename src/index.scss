@@ -201,25 +201,38 @@ nav a {
 
   &-item {
     position: relative;
-    padding-left: 10%;
+    padding: 0 10% 0 5%;
     margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 60%;
+    max-height: 50vh;
+    align-items: flex-start;
+    text-align: justify;
     counter-increment: timeline-counter;
+
+    &-date {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      margin-top: 0rem;
+    }
+
+    span {
+      background: #00bfff;
+      color: white;
+      padding: 0 5px;
+    }
 
     &::before {
       content: counter(timeline-counter) "|";
       position: absolute;
       left: 0;
       top: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
+      font-size: 4rem;
       color: #00bfff;
-      font-weight: bold;
+      line-height: 4rem;
     }
   }
 }

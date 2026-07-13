@@ -14,7 +14,7 @@ function VerticalContainer() {
         trigger: "#story",
         pin: true,
         scrub: 1,
-        end: "+=3500",
+        end: "+=3000",
       },
     });
   }, []);
@@ -23,13 +23,14 @@ function VerticalContainer() {
     <ul className="timeline-list">
       <li className="timeline-item">
         <h3>Sii Poland, Lublin (remote) — Frontend Developer</h3>
-        <p>December 2022 — Present</p>
+        <p className="timeline-date">December 2022 — June 2026</p>
         <p>
-          Project: Developing and maintaining a banking institution portal that
-          comprehensively provides information on products and their solutions.
+          <span>Project: </span>Developing and maintaining a banking institution
+          portal that comprehensively provides information on products and their
+          solutions.
         </p>
         <p>
-          Responsibilities/tasks: Planning and developing JS features and
+          <span>Responsibilities: </span>Planning and developing JS features and
           component structure, creating styles and animations in projects based
           mainly on the AEM (Adobe Experience Manager) platform; maintaining
           webpages; optimizing and analyzing page performance; daily cooperation
@@ -37,63 +38,78 @@ function VerticalContainer() {
           as well as scenarios in Playwright.
         </p>
         <p>Being part of an international team, working in Scrum.</p>
-        <p>Stack: JavaScript, React, Sass, Webpack, Jest, AEM 6.5</p>
+        <p>
+          <span>Stack:</span> JavaScript, React, Sass, Webpack, Jest, AEM 6.5
+        </p>
       </li>
       <li className="timeline-item">
         <h3>
           Transition Technologies MS, Lublin (hybrid/remote) — Lead Frontend
           Developer
         </h3>
-        <p>May 2020 — November 2022</p>
+        <p className="timeline-date">May 2020 — November 2022</p>
         <p>
-          Project: Migrating, developing and maintaining the watch
+          <span>Project: </span>Migrating, developing and maintaining the watch
           manufacturer's portal, which brought the product and its stories to
           life in a rich and interactive way.
         </p>
         <p>
-          Responsibilities/tasks: Leading a team of frontend developers,
+          <span>Responsibilities: </span>Leading a team of frontend developers,
           assigning tasks, and gathering feedback; daily cooperation with other
           teams and departments; taking part in recruiting developers; plus
           responsibilities from the previous role.
         </p>
-        <p>Stack: Vue.js, Sass, Webpack, AEM</p>
+        <p>
+          <span>Stack:</span> Vue.js, Sass, Webpack, AEM
+        </p>
       </li>
       <li className="timeline-item">
         <h3>Transition Technologies MS, Lublin — Frontend Developer</h3>
-        <p>December 2019 — April 2020</p>
+        <p className="timeline-date">December 2019 — April 2020</p>
         <p>
-          Project: Delivering product webpages for a global pharmaceutical
-          company, with special sensitivity to the needs of people with
-          disabilities.
+          <span>Project: </span>Delivering product webpages for a global
+          pharmaceutical company, with special sensitivity to the needs of
+          people with disabilities.
         </p>
         <p>
-          Responsibilities/tasks: Planning and designing features; creating new
-          responsive websites based on the AEM platform; developing JS features
-          and component structure; creating styles and animations; maintaining
-          webpages; optimizing page performance; taking part in creating UX/UI
-          design by external agencies; code reviewing.
+          <span>Responsibilities: </span>Planning and designing features;
+          creating new responsive websites based on the AEM platform; developing
+          JS features and component structure; creating styles and animations;
+          maintaining webpages; optimizing page performance; taking part in
+          creating UX/UI design by external agencies; code reviewing.
         </p>
         <p>Being part of an international team, working in Scrum.</p>
         <p>
-          Stack: JavaScript, jQuery, Typescript, Sass, Webpack, Cypress, AEM
+          <span>Stack:</span> JavaScript, jQuery, Typescript, Sass, Webpack,
+          Cypress, AEM
         </p>
       </li>
       <li className="timeline-item">
         <h3>InteliWISE.com, Lublin — Web Developer</h3>
-        <p>October 2016 — December 2019</p>
-        <p>Project: AI-based chatbot solution.</p>
+        <p className="timeline-date">October 2016 — December 2019</p>
         <p>
-          Responsibilities/tasks: Customizing the appearance of the product
-          according to the client's recommendations and developing additional
-          full-stack functionalities; creating automated tests in Cypress.
+          <span>Project: </span>AI-based chatbot solution.
         </p>
-        <p>Stack: JavaScript, React, Node.js, Cypress, Docker, PHP</p>
+        <p>
+          <span>Responsibilities: </span>Customizing the appearance of the
+          product according to the client's recommendations and developing
+          additional full-stack functionalities; creating automated tests in
+          Cypress.
+        </p>
+        <p>
+          <span>Stack:</span> JavaScript, React, Node.js, Cypress, Docker, PHP
+        </p>
       </li>
       <li className="timeline-item">
         <h3>Avrio Interactive, Warsaw — Web Developer</h3>
-        <p>March 2016 — May 2016</p>
-        <p>Creating websites based on the company's CMS system.</p>
-        <p>Stack: JavaScript, jQuery, PHP</p>
+        <p className="timeline-date">March 2016 — May 2016</p>
+        <p>
+          <span>Project: </span>Creating websites based on the company's CMS
+          system.
+        </p>
+        <p>
+          <span>Stack:</span> JavaScript, jQuery, PHP
+        </p>
       </li>
     </ul>
   );
