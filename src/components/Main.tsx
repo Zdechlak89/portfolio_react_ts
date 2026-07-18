@@ -1,10 +1,28 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import LocomotiveScroll from "locomotive-scroll";
 import Section from "./Section";
 import VerticalContainer from "./VerticalContainer";
 import { splitTextIntoWords } from "../utils/textAnimation";
+
+const STACK_TEXTS = [
+  "JavaScript",
+  "React",
+  "Sass",
+  "Webpack",
+  "Jest",
+  "AEM 6.5",
+  "Vue.js",
+  "jQuery",
+  "Typescript",
+  "Cypress",
+  "AEM",
+  "Node.js",
+  "Docker",
+  "PHP",
+];
+
+const STACK_TECHNOLOGIES = Array.from(new Set(STACK_TEXTS));
 
 interface ContactFormValues {
   name: string;
@@ -222,10 +240,13 @@ const MainSection = () => {
           <div className="container">
             <div className="col">
               <h2>Skills</h2>
-              <h3>Web Developer</h3>
-              <p>Information about the Web Developer's skills</p>
-              <h3>Photographer</h3>
-              <p>Information about the Photographer's skills</p>
+              <div className="tech-stack">
+                {STACK_TECHNOLOGIES.map((technology) => (
+                  <span key={technology} className="tech-stack__item">
+                    {technology}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </Section>
