@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import LocomotiveScroll from "locomotive-scroll";
@@ -6,12 +6,88 @@ import Section from "./Section";
 import VerticalContainer from "./VerticalContainer";
 import { splitTextIntoWords } from "../utils/textAnimation";
 
+interface ContactFormValues {
+  name: string;
+  email: string;
+  message: string;
+}
+
+interface ContactFormErrors {
+  name?: string;
+  email?: string;
+  message?: string;
+}
+
 gsap.registerPlugin(ScrollTrigger);
 
 const MainSection = () => {
   const mainSectionRef = useRef<HTMLElement>(null);
   const mainTextRef = useRef<HTMLDivElement>(null);
   const mainImageRef = useRef<HTMLImageElement>(null);
+  const [formValues, setFormValues] = useState<ContactFormValues>({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const validateForm = (values: ContactFormValues) => {
+    const errors: ContactFormErrors = {};
+
+    if (!values.name.trim()) {
+      errors.name = "Please enter your name.";
+    }
+
+    if (!values.email.trim()) {
+      errors.email = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) {
+      errors.email = "Please enter a valid email address.";
+    }
+
+    if (!values.message.trim()) {
+      errors.message = "Please enter your message.";
+    } else if (values.message.trim().length < 10) {
+      errors.message = "Message should be at least 10 characters long.";
+    }
+
+    return errors;
+  };
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.target;
+
+    setFormValues((previousValues) => ({
+      ...previousValues,
+      [name]: value,
+    }));
+
+    setFormErrors((previousErrors) => ({
+      ...previousErrors,
+      [name]: undefined,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const errors = validateForm(formValues);
+    setFormErrors(errors);
+
+    if (Object.keys(errors).length > 0) {
+      setIsSubmitted(false);
+      return;
+    }
+
+    setIsSubmitted(true);
+    setFormValues({
+      name: "",
+      email: "",
+      message: "",
+    });
+  };
 
   useEffect(() => {
     const section = mainSectionRef.current;
@@ -157,10 +233,50 @@ const MainSection = () => {
           <div className="container">
             <div className="col">
               <h2>Contact</h2>
-              <h3>Web Developer</h3>
-              <p>Contact information for Web Developer</p>
-              <h3>Photographer</h3>
-              <p>Contact information for Photographer</p>
+              <form className="contact-form" onSubmit={handleSubmit} noValidate>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formValues.name}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.name && <span>{formErrors.name}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formValues.email}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.email && <span>{formErrors.email}</span>}
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="message">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows={5}
+                    value={formValues.message}
+                    onChange={handleInputChange}
+                  />
+                  {formErrors.message && <span>{formErrors.message}</span>}
+                </div>
+
+                <button type="submit">Send message</button>
+                {isSubmitted && (
+                  <p className="success-message">
+                    Your message has been sent successfully.
+                  </p>
+                )}
+              </form>
             </div>
           </div>
         </Section>

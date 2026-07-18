@@ -94,19 +94,19 @@ h1 {
 }
 
 h2 {
-  font-size: 5vw;
+  font-size: 2rem;
   text-align: justify;
   margin: 0.2em 0;
 }
 
 h3 {
-  font-size: 2vw;
-  margin: 0 2vw 0 0;
+  font-size: 2rem;
+  margin: 0 2rem 0 0;
   color: #00bfff;
 }
 
 p {
-  font-size: 1vw;
+  font-size: 1rem;
 }
 
 h1,
@@ -133,6 +133,91 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.contact-form {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 700px);
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 191, 255, 0.25);
+  border-radius: 18px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.form-group {
+  display: grid;
+  gap: 0.45rem;
+
+  label {
+    font-family: Montserrat;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba(26, 26, 26, 0.15);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    font: inherit;
+    color: #1a1a1a;
+    background-color: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: #00bfff;
+      box-shadow: 0 0 0 3px rgba(0, 191, 255, 0.18);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 140px;
+  }
+
+  span {
+    color: #c0392b;
+    font-size: 0.9rem;
+  }
+}
+
+.contact-form button {
+  width: fit-content;
+  padding: 0.8rem 1.4rem;
+  background: #1a1a1a;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.success-message {
+  margin: 0;
+  color: #0f8f5c;
+  font-weight: 600;
+}
+
+body.dark .contact-form {
+  background: rgba(44, 44, 44, 0.85);
+  border-color: rgba(0, 191, 255, 0.4);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+
+  .form-group label,
+  input,
+  textarea {
+    color: #ffffff;
+  }
+
+  input,
+  textarea {
+    background-color: #1f1f1f;
+    border-color: rgba(255, 255, 255, 0.12);
+  }
 }
 
 @media (prefers-color-scheme: light) {
@@ -207,7 +292,7 @@ nav a {
     flex-direction: column;
     align-items: flex-start;
     flex: 1 0 60%;
-    max-height: 50vh;
+    max-height: 70vh;
     align-items: flex-start;
     text-align: justify;
     counter-increment: timeline-counter;
