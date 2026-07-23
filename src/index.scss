@@ -36,7 +36,7 @@
 
   --gutter: 1.5rem;
   --side-margin: 120px;
-  --max-width: 100vw;
+  --max-width: calc(100vw - 2 * var(--side-margin));
 }
 #root {
   margin: 0 auto;
@@ -168,7 +168,9 @@ button:focus-visible {
     font: inherit;
     color: #1a1a1a;
     background-color: #ffffff;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease;
 
     &:focus {
       outline: none;
@@ -200,6 +202,25 @@ button:focus-visible {
   margin: 0;
   color: #0f8f5c;
   font-weight: 600;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.25rem;
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.7rem 1rem;
+    background: linear-gradient(135deg, #00bfff 0%, #0088cc 100%);
+    color: #ffffff;
+    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 191, 255, 0.2);
+    opacity: 0;
+    transform: translateY(18px);
+  }
 }
 
 body.dark .contact-form {
@@ -325,7 +346,7 @@ nav a {
 .container {
   width: min(100%, var(--max-width));
   margin: 0 auto;
-  padding: 0 var(--side-margin);
+  // padding: 0 var(--side-margin);
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: var(--gutter);

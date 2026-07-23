@@ -16,18 +16,19 @@ type FormInputElement = HTMLInputElement | HTMLTextAreaElement;
 
 const STACK_TEXTS = [
   "JavaScript",
-  "React",
-  "Sass",
-  "Webpack",
-  "Jest",
-  "Vue.js",
-  "jQuery",
   "Typescript",
-  "Cypress",
+  "React",
+  "Vue.js",
   "AEM",
   "Node.js",
-  "Docker",
   "PHP",
+  "Sass",
+  "Playwright",
+  "Cypress",
+  "Jest",
+  "Docker",
+  "Webpack",
+  "Vite",
 ];
 
 const STACK_TECHNOLOGIES: string[] = Array.from(new Set(STACK_TEXTS));
@@ -127,6 +128,9 @@ const MainSection = (): ReactElement => {
     const section = mainSectionRef.current;
     const textContainer = mainTextRef.current;
     const image = mainImageRef.current;
+    const skillsSection = document.getElementById("skills");
+    const skillItems = document.querySelectorAll<HTMLElement>(".tech-stack__item");
+
     if (!section || !textContainer || !image) return;
 
     const heading = textContainer.querySelector("h1");
@@ -213,11 +217,31 @@ const MainSection = (): ReactElement => {
       },
     });
 
+    if (skillsSection && skillItems.length > 0) {
+      gsap.fromTo(
+        skillItems,
+        { opacity: 0, y: 18 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.55,
+          stagger: 0.08,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: skillsSection,
+            start: "top 80%",
+            once: true,
+          },
+        },
+      );
+    }
+
     return () => {
       headingTimeline.kill();
       paraTimeline.kill();
       textScroll.kill();
       imageScroll.kill();
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
