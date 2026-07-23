@@ -1,14 +1,13 @@
 import "./Header.scss";
-import { useContext } from "react";
-import { ModeContext } from "../store/app-context";
+import { useModeContext } from "../store/app-context";
 import Link from "./Link";
 import ModeButton from "./ModeButton";
 
 function Header() {
-  const { darkMode, setDarkMode } = useContext(ModeContext);
+  const { darkMode, setDarkMode } = useModeContext();
 
   const switchDarkMode = () => {
-    setDarkMode(darkMode ? false : true);
+    setDarkMode(!darkMode);
   };
 
   return (

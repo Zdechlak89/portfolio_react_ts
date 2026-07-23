@@ -1,18 +1,19 @@
+import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode } from "react";
 import styled from "styled-components";
 import { gsap } from "gsap";
 import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
 gsap.registerPlugin(ScrollToPlugin);
 
-interface LinkProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
+interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const StyledLink = styled.a``;
 
-const Link: React.FC<LinkProps> = ({ href, children, ...props }) => {
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+const Link: FC<LinkProps> = ({ href, children, ...props }) => {
+  const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
       e.preventDefault();
       const targetId = href.substring(1);

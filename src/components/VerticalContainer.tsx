@@ -2,12 +2,17 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
 
-function VerticalContainer() {
-  gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
+function VerticalContainer() {
   useEffect(() => {
     const horizontalSections = document.querySelectorAll(".timeline-item");
-    gsap.to(horizontalSections, {
+
+    if (horizontalSections.length === 0) {
+      return;
+    }
+
+    const timelineAnimation = gsap.to(horizontalSections, {
       xPercent: -100 * (horizontalSections.length - 1),
       ease: "none",
       scrollTrigger: {
@@ -17,6 +22,10 @@ function VerticalContainer() {
         end: "+=3000",
       },
     });
+
+    return () => {
+      timelineAnimation.kill();
+    };
   }, []);
 
   return (

@@ -1,15 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import MainSection from "./components/Main";
 import { ModeContext } from "./store/app-context";
 
 const App: React.FC = () => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
-  if (darkMode) {
-    document.body.classList.add("dark");
-  } else {
-    document.body.classList.remove("dark");
-  }
+
+  useEffect(() => {
+    document.body.classList.toggle("dark", darkMode);
+  }, [darkMode]);
 
   return (
     <ModeContext.Provider value={{ darkMode, setDarkMode }}>

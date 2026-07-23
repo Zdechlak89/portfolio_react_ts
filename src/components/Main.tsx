@@ -11,7 +11,6 @@ const STACK_TEXTS = [
   "Sass",
   "Webpack",
   "Jest",
-  "AEM 6.5",
   "Vue.js",
   "jQuery",
   "Typescript",
@@ -198,9 +197,10 @@ const MainSection = () => {
     });
 
     return () => {
+      headingTimeline.kill();
+      paraTimeline.kill();
       textScroll.kill();
       imageScroll.kill();
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
   }, []);
 
@@ -221,7 +221,7 @@ const MainSection = () => {
             <div className="col col-lg-5">
               <img
                 ref={mainImageRef}
-                src="./public/DAD_0409.jpg"
+                src="/DAD_0409.jpg"
                 className="main-image"
                 alt="Emil Augustynowicz photo"
               />

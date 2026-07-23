@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useContext } from "react";
 
 const ModeContext = createContext<{
   darkMode: boolean;
@@ -7,5 +7,7 @@ const ModeContext = createContext<{
   darkMode: false,
   setDarkMode: () => {},
 });
+
+export const useModeContext = () => useContext(ModeContext);
 
 export { ModeContext };
