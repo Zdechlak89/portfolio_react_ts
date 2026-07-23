@@ -1,13 +1,20 @@
-import { createContext, useContext } from "react";
+import {
+  createContext,
+  useContext,
+  type Dispatch,
+  type SetStateAction,
+} from "react";
 
-const ModeContext = createContext<{
+export interface ModeContextValue {
   darkMode: boolean;
-  setDarkMode: (name: boolean) => void;
-}>({
+  setDarkMode: Dispatch<SetStateAction<boolean>>;
+}
+
+const ModeContext = createContext<ModeContextValue>({
   darkMode: false,
   setDarkMode: () => {},
 });
 
-export const useModeContext = () => useContext(ModeContext);
+export const useModeContext = (): ModeContextValue => useContext(ModeContext);
 
 export { ModeContext };

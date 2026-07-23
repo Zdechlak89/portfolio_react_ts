@@ -3,10 +3,10 @@ import { useModeContext } from "../store/app-context";
 import Link from "./Link";
 import ModeButton from "./ModeButton";
 
-function Header() {
+function Header(): JSX.Element {
   const { darkMode, setDarkMode } = useModeContext();
 
-  const switchDarkMode = () => {
+  const switchDarkMode = (): void => {
     setDarkMode(!darkMode);
   };
 

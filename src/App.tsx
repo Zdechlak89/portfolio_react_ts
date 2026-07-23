@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import Header from "./components/Header";
 import MainSection from "./components/Main";
 import { ModeContext } from "./store/app-context";
 
-const App: React.FC = () => {
+const App = (): ReactElement => {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   useEffect(() => {

@@ -1,9 +1,18 @@
-import { FormEvent, useEffect, useRef, useState } from "react";
+import {
+  type ChangeEvent,
+  type FormEvent,
+  type ReactElement,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Section from "./Section";
 import VerticalContainer from "./VerticalContainer";
 import { splitTextIntoWords } from "../utils/textAnimation";
+
+type FormInputElement = HTMLInputElement | HTMLTextAreaElement;
 
 const STACK_TEXTS = [
   "JavaScript",
@@ -21,7 +30,7 @@ const STACK_TEXTS = [
   "PHP",
 ];
 
-const STACK_TECHNOLOGIES = Array.from(new Set(STACK_TEXTS));
+const STACK_TECHNOLOGIES: string[] = Array.from(new Set(STACK_TEXTS));
 
 interface ContactFormValues {
   name: string;
@@ -37,7 +46,7 @@ interface ContactFormErrors {
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MainSection = () => {
+const MainSection = (): ReactElement => {
   const mainSectionRef = useRef<HTMLElement>(null);
   const mainTextRef = useRef<HTMLDivElement>(null);
   const mainImageRef = useRef<HTMLImageElement>(null);
@@ -49,7 +58,7 @@ const MainSection = () => {
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const validateForm = (values: ContactFormValues) => {
+  const validateForm = (values: ContactFormValues): ContactFormErrors => {
     const errors: ContactFormErrors = {};
 
     if (!values.name.trim()) {
@@ -71,10 +80,18 @@ const MainSection = () => {
     return errors;
   };
 
-  const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
+  const isContactFormField = (
+    name: string,
+  ): name is keyof ContactFormValues => {
+    return name === "name" || name === "email" || name === "message";
+  };
+
+  const handleInputChange = (event: ChangeEvent<FormInputElement>): void => {
     const { name, value } = event.target;
+
+    if (!isContactFormField(name)) {
+      return;
+    }
 
     setFormValues((previousValues) => ({
       ...previousValues,
@@ -87,7 +104,7 @@ const MainSection = () => {
     }));
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     const errors = validateForm(formValues);
