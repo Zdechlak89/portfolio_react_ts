@@ -212,14 +212,31 @@ button:focus-visible {
   &__item {
     display: inline-flex;
     align-items: center;
+    gap: 0.5rem;
     justify-content: center;
     padding: 0.7rem 1rem;
     background: linear-gradient(135deg, #00bfff 0%, #0088cc 100%);
     color: #ffffff;
     font-weight: 600;
     box-shadow: 0 8px 20px rgba(0, 191, 255, 0.2);
+    border-radius: 8px;
     opacity: 0;
     transform: translateY(18px);
+  }
+
+  &__stars {
+    display: inline-flex;
+    gap: 1px;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+  }
+
+  &__star {
+    opacity: 0.35;
+
+    &--filled {
+      opacity: 1;
+    }
   }
 }
 
@@ -354,6 +371,78 @@ nav a {
 
 .row {
   display: contents;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --side-margin: 24px;
+  }
+
+  #main {
+    min-height: auto;
+    padding-top: 100px;
+    padding-bottom: 40px;
+  }
+
+  .main-heading {
+    font-size: 3.4rem;
+    text-align: left;
+    overflow-wrap: anywhere;
+  }
+
+  .main-text p {
+    font-size: 1rem;
+  }
+
+  .main-image {
+    max-width: 140px;
+  }
+
+  #story {
+    min-height: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .timeline {
+    &-list {
+      flex-direction: column;
+      flex-wrap: wrap;
+      width: 100%;
+      overflow: visible;
+      gap: 2rem;
+    }
+
+    &-item {
+      flex: none;
+      max-height: none;
+      padding: 0 2rem 0 1rem;
+
+      h3 {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  #skills {
+    min-height: auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .tech-stack {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #contact {
+    min-height: auto;
+    padding-bottom: 60px;
+  }
+
+  .contact-form {
+    padding: 1.5rem;
+  }
 }
 
 .col {

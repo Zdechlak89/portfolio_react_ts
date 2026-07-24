@@ -14,24 +14,27 @@ import { splitTextIntoWords } from "../utils/textAnimation";
 
 type FormInputElement = HTMLInputElement | HTMLTextAreaElement;
 
-const STACK_TEXTS = [
-  "JavaScript",
-  "Typescript",
-  "React",
-  "Vue.js",
-  "AEM",
-  "Node.js",
-  "PHP",
-  "Sass",
-  "Playwright",
-  "Cypress",
-  "Jest",
-  "Docker",
-  "Webpack",
-  "Vite",
-];
+interface Technology {
+  name: string;
+  level: number;
+}
 
-const STACK_TECHNOLOGIES: string[] = Array.from(new Set(STACK_TEXTS));
+const STACK_TECHNOLOGIES: Technology[] = [
+  { name: "JavaScript", level: 5 },
+  { name: "Typescript", level: 4 },
+  { name: "React", level: 3 },
+  { name: "Vue.js", level: 2 },
+  { name: "AEM", level: 4 },
+  { name: "Node.js", level: 3 },
+  { name: "PHP", level: 1 },
+  { name: "Sass", level: 5 },
+  { name: "Playwright", level: 4 },
+  { name: "Cypress", level: 4 },
+  { name: "Jest", level: 4 },
+  { name: "Docker", level: 3 },
+  { name: "Webpack", level: 4 },
+  { name: "Vite", level: 3 },
+];
 
 interface ContactFormValues {
   name: string;
@@ -129,7 +132,8 @@ const MainSection = (): ReactElement => {
     const textContainer = mainTextRef.current;
     const image = mainImageRef.current;
     const skillsSection = document.getElementById("skills");
-    const skillItems = document.querySelectorAll<HTMLElement>(".tech-stack__item");
+    const skillItems =
+      document.querySelectorAll<HTMLElement>(".tech-stack__item");
 
     if (!section || !textContainer || !image) return;
 
@@ -283,8 +287,25 @@ const MainSection = (): ReactElement => {
               <h2>Skills</h2>
               <div className="tech-stack">
                 {STACK_TECHNOLOGIES.map((technology) => (
-                  <span key={technology} className="tech-stack__item">
-                    {technology}
+                  <span key={technology.name} className="tech-stack__item">
+                    <span>{technology.name}</span>
+                    <span
+                      className="tech-stack__stars"
+                      aria-label={`${technology.level} out of 5`}
+                    >
+                      {Array.from({ length: 5 }, (_, index) => (
+                        <span
+                          key={index}
+                          className={
+                            index < technology.level
+                              ? "tech-stack__star tech-stack__star--filled"
+                              : "tech-stack__star"
+                          }
+                        >
+                          ★
+                        </span>
+                      ))}
+                    </span>
                   </span>
                 ))}
               </div>

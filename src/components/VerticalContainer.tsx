@@ -12,19 +12,27 @@ function VerticalContainer() {
       return;
     }
 
-    const timelineAnimation = gsap.to(horizontalSections, {
-      xPercent: -100 * (horizontalSections.length - 1),
-      ease: "none",
-      scrollTrigger: {
-        trigger: "#story",
-        pin: true,
-        scrub: 1,
-        end: "+=3000",
-      },
+    const mm = gsap.matchMedia();
+
+    mm.add("(min-width: 601px)", () => {
+      const timelineAnimation = gsap.to(horizontalSections, {
+        xPercent: -100 * (horizontalSections.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: "#story",
+          pin: true,
+          scrub: 1,
+          end: "+=3000",
+        },
+      });
+
+      return () => {
+        timelineAnimation.kill();
+      };
     });
 
     return () => {
-      timelineAnimation.kill();
+      mm.revert();
     };
   }, []);
 

@@ -21,5 +21,10 @@ const ModeButton = styled.button`
     background-image: url("./dark_mode_FILL0_wght400_GRAD0_opsz24.svg");
     filter: invert(90%);
   }
+
+  @media (max-width: 600px) {
+    top: 24px;
+    right: 20px;
+  }
 `;
 export default ModeButton;
