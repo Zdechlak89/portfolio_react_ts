@@ -23,12 +23,7 @@ header {
 
   @media (max-width: 600px) {
     nav {
-      top: 24px;
-      left: 20px;
-      writing-mode: horizontal-tb;
-      text-orientation: initial;
-      display: flex;
-      gap: 12px;
+      display: none;
     }
 
     div {

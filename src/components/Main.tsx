@@ -259,11 +259,13 @@ const MainSection = (): ReactElement => {
                 <h1 className="main-heading">
                   {splitTextIntoWords("Emil Augustynowicz")}
                 </h1>
-                <p>Web Developer</p>
-                <p>Photographer</p>
+                <div className="main-subheading">
+                  <p>Web Developer</p>
+                  <p>Photographer</p>
+                </div>
               </div>
             </div>
-            <div className="col col-lg-5">
+            <div className="col col-lg-5 main-image-container">
               <img
                 ref={mainImageRef}
                 src="/DAD_0409.jpg"

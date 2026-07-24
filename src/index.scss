@@ -89,13 +89,11 @@ body {
 h1 {
   line-height: 0.8;
   font-size: 10vw;
-  text-align: justify;
   margin: 0.2em 0;
 }
 
 h2 {
   font-size: 2rem;
-  text-align: justify;
   margin: 0.2em 0;
 }
 
@@ -114,6 +112,7 @@ h2,
 h3 {
   font-family: Montserrat;
   font-weight: 600;
+  text-align: left;
 }
 
 button {
@@ -296,6 +295,14 @@ nav a {
     height: 100%;
     align-content: flex-end;
 
+    .main-subheading {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
     p {
       font-size: 2vw;
       margin: 0 2vw 0 0;
@@ -380,7 +387,7 @@ nav a {
 
   #main {
     min-height: auto;
-    padding-top: 100px;
+    padding-top: 40px;
     padding-bottom: 40px;
   }
 
@@ -388,14 +395,23 @@ nav a {
     font-size: 3.4rem;
     text-align: left;
     overflow-wrap: anywhere;
+    writing-mode: sideways-lr;
+    display: flex;
+    flex-direction: column;
   }
-
-  .main-text p {
+  .main-subheading p {
     font-size: 1rem;
   }
 
   .main-image {
-    max-width: 140px;
+    max-width: 55vw;
+
+    &-container {
+      position: absolute;
+      right: 24px;
+      height: 100vh;
+      width: auto;
+    }
   }
 
   #story {
@@ -418,8 +434,13 @@ nav a {
       max-height: none;
       padding: 0 2rem 0 1rem;
 
+      &::before {
+        position: relative;
+        font-size: 3rem;
+      }
+
       h3 {
-        font-size: 1.4rem;
+        font-size: 2rem;
       }
     }
   }
