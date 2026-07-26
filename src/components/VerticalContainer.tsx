@@ -13,16 +13,25 @@ function VerticalContainer() {
     }
 
     const mm = gsap.matchMedia();
+    const steps = horizontalSections.length - 1;
 
     mm.add("(min-width: 601px)", () => {
       const timelineAnimation = gsap.to(horizontalSections, {
-        xPercent: -100 * (horizontalSections.length - 1),
+        xPercent: -100 * steps,
         ease: "none",
         scrollTrigger: {
           trigger: "#story",
           pin: true,
           scrub: 1,
           end: "+=3000",
+          snap:
+            steps > 0
+              ? {
+                  snapTo: 1 / steps,
+                  duration: { min: 0.2, max: 0.6 },
+                  ease: "power1.inOut",
+                }
+              : undefined,
         },
       });
 

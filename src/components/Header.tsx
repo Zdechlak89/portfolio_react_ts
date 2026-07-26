@@ -16,14 +16,14 @@ function Header(): JSX.Element {
         <nav>
           <Link href="#main">Main</Link>
           <Link href="#story">Story</Link>
-          <Link href="#">Link</Link>
+          <Link href="#skills">Skills</Link>
           <Link href="#contact">Contact</Link>
         </nav>
         <ModeButton
           className={`mode ` + darkMode}
           onClick={switchDarkMode}
         ></ModeButton>
-        <div>
+        <div className="header-links">
           <a href="#">Link</a>
           <a href="#">Link</a>
           <a href="#">Link</a>

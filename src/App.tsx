@@ -1,4 +1,5 @@
 import { useEffect, useState, type ReactElement } from "react";
+import BackgroundFan from "./components/BackgroundFan";
 import Header from "./components/Header";
 import MainSection from "./components/Main";
 import { ModeContext } from "./store/app-context";
@@ -12,8 +13,11 @@ const App = (): ReactElement => {
 
   return (
     <ModeContext.Provider value={{ darkMode, setDarkMode }}>
-      <Header></Header>
-      <MainSection></MainSection>
+      <BackgroundFan></BackgroundFan>
+      <div className="app-content">
+        <Header></Header>
+        <MainSection></MainSection>
+      </div>
     </ModeContext.Provider>
   );
 };

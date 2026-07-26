@@ -17,23 +17,24 @@ type FormInputElement = HTMLInputElement | HTMLTextAreaElement;
 interface Technology {
   name: string;
   level: number;
+  description: string;
 }
 
 const STACK_TECHNOLOGIES: Technology[] = [
-  { name: "JavaScript", level: 5 },
-  { name: "Typescript", level: 4 },
-  { name: "React", level: 3 },
-  { name: "Vue.js", level: 2 },
-  { name: "AEM", level: 4 },
-  { name: "Node.js", level: 3 },
-  { name: "PHP", level: 1 },
-  { name: "Sass", level: 5 },
-  { name: "Playwright", level: 4 },
-  { name: "Cypress", level: 4 },
-  { name: "Jest", level: 4 },
-  { name: "Docker", level: 3 },
-  { name: "Webpack", level: 4 },
-  { name: "Vite", level: 3 },
+  { name: "JavaScript", level: 5, description: "Used in: [project name]" },
+  { name: "Typescript", level: 4, description: "Used in: [project name]" },
+  { name: "React", level: 3, description: "Used in: [project name]" },
+  { name: "Vue.js", level: 2, description: "Used in: [project name]" },
+  { name: "AEM", level: 4, description: "Used in: [project name]" },
+  { name: "Node.js", level: 3, description: "Used in: [project name]" },
+  { name: "PHP", level: 1, description: "Used in: [project name]" },
+  { name: "Sass", level: 5, description: "Used in: [project name]" },
+  { name: "Playwright", level: 4, description: "Used in: [project name]" },
+  { name: "Cypress", level: 4, description: "Used in: [project name]" },
+  { name: "Jest", level: 4, description: "Used in: [project name]" },
+  { name: "Docker", level: 3, description: "Used in: [project name]" },
+  { name: "Webpack", level: 4, description: "Used in: [project name]" },
+  { name: "Vite", level: 3, description: "Used in: [project name]" },
 ];
 
 interface ContactFormValues {
@@ -61,6 +62,15 @@ const MainSection = (): ReactElement => {
   });
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [selectedSkill, setSelectedSkill] = useState<Technology | null>(null);
+
+  const handleSkillClick = (technology: Technology): void => {
+    setSelectedSkill(technology);
+  };
+
+  const handleCloseSkillModal = (): void => {
+    setSelectedSkill(null);
+  };
 
   const validateForm = (values: ContactFormValues): ContactFormErrors => {
     const errors: ContactFormErrors = {};
@@ -289,7 +299,12 @@ const MainSection = (): ReactElement => {
               <h2>Skills</h2>
               <div className="tech-stack">
                 {STACK_TECHNOLOGIES.map((technology) => (
-                  <span key={technology.name} className="tech-stack__item">
+                  <button
+                    key={technology.name}
+                    type="button"
+                    className="tech-stack__item"
+                    onClick={() => handleSkillClick(technology)}
+                  >
                     <span>{technology.name}</span>
                     <span
                       className="tech-stack__stars"
@@ -308,9 +323,38 @@ const MainSection = (): ReactElement => {
                         </span>
                       ))}
                     </span>
-                  </span>
+                  </button>
                 ))}
               </div>
+              {selectedSkill && (
+                <div
+                  className="skill-modal-overlay"
+                  onClick={handleCloseSkillModal}
+                >
+                  <div
+                    className="skill-modal"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-label={selectedSkill.name}
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    <button
+                      type="button"
+                      className="skill-modal__close"
+                      onClick={handleCloseSkillModal}
+                      aria-label="Close"
+                    >
+                      ×
+                    </button>
+                    <h3 className="skill-modal__title">
+                      {selectedSkill.name}
+                    </h3>
+                    <p className="skill-modal__description">
+                      {selectedSkill.description}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </Section>
