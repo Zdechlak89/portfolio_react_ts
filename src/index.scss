@@ -187,6 +187,7 @@ button:focus-visible {
 .form-hint {
   margin: 0.5rem 0 0;
   font-size: 0.9rem;
+  text-align: left;
 }
 
 .contact-form {
@@ -196,6 +197,20 @@ button:focus-visible {
   margin-top: 1.5rem;
   padding: 1.5rem 0;
   text-align: left;
+}
+
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  text-align: left;
+
+  p {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    max-width: 46ch;
+  }
 }
 
 .form-group {
@@ -540,7 +555,7 @@ nav a {
     &-item {
       flex: none;
       max-height: none;
-      padding: 0 2rem 0 1rem;
+      padding: 0;
 
       &::before {
         position: relative;
@@ -575,53 +590,66 @@ nav a {
 }
 
 .col {
-  grid-column: span 12;
+  grid-column-start: auto;
+  grid-column-end: span 12;
 
   &-sm-6 {
     @media (min-width: 768px) {
-      grid-column: span 6;
+      grid-column-end: span 6;
     }
   }
 
   &-sm-8 {
     @media (min-width: 768px) {
-      grid-column: span 8;
+      grid-column-end: span 8;
     }
   }
 
   &-sm-4 {
     @media (min-width: 768px) {
-      grid-column: span 4;
+      grid-column-end: span 4;
     }
   }
 
   &-sm-3 {
     @media (min-width: 768px) {
-      grid-column: span 3;
+      grid-column-end: span 3;
+    }
+  }
+
+  &-sm-5 {
+    @media (min-width: 768px) {
+      grid-column-end: span 5;
+    }
+  }
+
+  &-offset-sm-2 {
+    @media (min-width: 768px) {
+      grid-column-start: 8;
     }
   }
 
   &-lg-7 {
     @media (min-width: 1024px) {
-      grid-column: span 7;
+      grid-column-end: span 7;
     }
   }
 
   &-lg-5 {
     @media (min-width: 1024px) {
-      grid-column: span 5;
+      grid-column-end: span 5;
     }
   }
 
   &-lg-4 {
     @media (min-width: 1024px) {
-      grid-column: span 4;
+      grid-column-end: span 4;
     }
   }
 
   &-lg-3 {
     @media (min-width: 1024px) {
-      grid-column: span 3;
+      grid-column-end: span 3;
     }
   }
 }

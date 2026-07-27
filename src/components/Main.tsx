@@ -407,7 +407,7 @@ const MainSection = (): ReactElement => {
         </Section>
         <Section id="contact">
           <div className="container">
-            <div className="col">
+            <div className="col col-sm-5">
               <h2>Contact</h2>
               <p className="form-hint">All fields are required.</p>
               <form className="contact-form" onSubmit={handleSubmit} noValidate>
@@ -421,7 +421,9 @@ const MainSection = (): ReactElement => {
                     required
                     aria-required="true"
                     aria-invalid={Boolean(formErrors.name)}
-                    aria-describedby={formErrors.name ? "name-error" : undefined}
+                    aria-describedby={
+                      formErrors.name ? "name-error" : undefined
+                    }
                     value={formValues.name}
                     onChange={handleInputChange}
                   />
@@ -484,6 +486,21 @@ const MainSection = (): ReactElement => {
                   </p>
                 )}
               </form>
+            </div>
+            <div className="col col-sm-5 col-offset-sm-2 contact-intro">
+              <h2>Let&rsquo;s create something great</h2>
+              <p>
+                I can&rsquo;t wait to dive into a new project — there&rsquo;s
+                nothing quite like turning a blank page into something people
+                actually use. If you&rsquo;ve got an idea sitting in a notebook,
+                a product that needs an extra pair of hands, or a problem you
+                haven&rsquo;t quite cracked yet, I&rsquo;d love to hear about
+                it.
+              </p>
+              <p>
+                Let&rsquo;s talk about how we can bring your idea to life — drop
+                me a message and I&rsquo;ll get back to you soon.
+              </p>
             </div>
           </div>
         </Section>
