@@ -9,8 +9,9 @@ const ModeButton = styled.button`
   background-repeat: no-repeat;
   background-color: transparent;
   border: 0 none;
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  z-index: 9;
 
   &:hover {
     background-color: #80808080;

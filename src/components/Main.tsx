@@ -1,6 +1,7 @@
 import {
   type ChangeEvent,
   type FormEvent,
+  type MouseEvent,
   type ReactElement,
   useEffect,
   useRef,
@@ -63,14 +64,62 @@ const MainSection = (): ReactElement => {
   const [formErrors, setFormErrors] = useState<ContactFormErrors>({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<Technology | null>(null);
+  const skillModalRef = useRef<HTMLDivElement>(null);
+  const skillTriggerRef = useRef<HTMLElement | null>(null);
 
-  const handleSkillClick = (technology: Technology): void => {
+  const handleSkillClick = (
+    technology: Technology,
+    event: MouseEvent<HTMLButtonElement>,
+  ): void => {
+    skillTriggerRef.current = event.currentTarget;
     setSelectedSkill(technology);
   };
 
   const handleCloseSkillModal = (): void => {
     setSelectedSkill(null);
   };
+
+  useEffect(() => {
+    if (!selectedSkill) return;
+
+    const modalElement = skillModalRef.current;
+    const focusableSelector =
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+    const focusableElements = modalElement
+      ? Array.from(
+          modalElement.querySelectorAll<HTMLElement>(focusableSelector),
+        )
+      : [];
+
+    focusableElements[0]?.focus();
+
+    const handleKeyDown = (event: KeyboardEvent): void => {
+      if (event.key === "Escape") {
+        setSelectedSkill(null);
+        return;
+      }
+
+      if (event.key !== "Tab" || focusableElements.length === 0) return;
+
+      const first = focusableElements[0];
+      const last = focusableElements[focusableElements.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      skillTriggerRef.current?.focus();
+    };
+  }, [selectedSkill]);
 
   const validateForm = (values: ContactFormValues): ContactFormErrors => {
     const errors: ContactFormErrors = {};
@@ -261,7 +310,7 @@ const MainSection = (): ReactElement => {
 
   return (
     <>
-      <main>
+      <main id="main-content" tabIndex={-1}>
         <Section id="main" ref={mainSectionRef}>
           <div className="container">
             <div className="col col-lg-7">
@@ -302,7 +351,7 @@ const MainSection = (): ReactElement => {
                     key={technology.name}
                     type="button"
                     className="tech-stack__item"
-                    onClick={() => handleSkillClick(technology)}
+                    onClick={(event) => handleSkillClick(technology, event)}
                   >
                     <span>{technology.name}</span>
                     <span
@@ -335,6 +384,7 @@ const MainSection = (): ReactElement => {
                     role="dialog"
                     aria-modal="true"
                     aria-label={selectedSkill.name}
+                    ref={skillModalRef}
                     onClick={(event) => event.stopPropagation()}
                   >
                     <button
@@ -359,6 +409,7 @@ const MainSection = (): ReactElement => {
           <div className="container">
             <div className="col">
               <h2>Contact</h2>
+              <p className="form-hint">All fields are required.</p>
               <form className="contact-form" onSubmit={handleSubmit} noValidate>
                 <div className="form-group">
                   <label htmlFor="name">Name</label>
@@ -366,10 +417,19 @@ const MainSection = (): ReactElement => {
                     id="name"
                     name="name"
                     type="text"
+                    autoComplete="name"
+                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(formErrors.name)}
+                    aria-describedby={formErrors.name ? "name-error" : undefined}
                     value={formValues.name}
                     onChange={handleInputChange}
                   />
-                  {formErrors.name && <span>{formErrors.name}</span>}
+                  {formErrors.name && (
+                    <span id="name-error" role="alert">
+                      {formErrors.name}
+                    </span>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -378,10 +438,21 @@ const MainSection = (): ReactElement => {
                     id="email"
                     name="email"
                     type="email"
+                    autoComplete="email"
+                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(formErrors.email)}
+                    aria-describedby={
+                      formErrors.email ? "email-error" : undefined
+                    }
                     value={formValues.email}
                     onChange={handleInputChange}
                   />
-                  {formErrors.email && <span>{formErrors.email}</span>}
+                  {formErrors.email && (
+                    <span id="email-error" role="alert">
+                      {formErrors.email}
+                    </span>
+                  )}
                 </div>
 
                 <div className="form-group">
@@ -390,15 +461,25 @@ const MainSection = (): ReactElement => {
                     id="message"
                     name="message"
                     rows={5}
+                    required
+                    aria-required="true"
+                    aria-invalid={Boolean(formErrors.message)}
+                    aria-describedby={
+                      formErrors.message ? "message-error" : undefined
+                    }
                     value={formValues.message}
                     onChange={handleInputChange}
                   />
-                  {formErrors.message && <span>{formErrors.message}</span>}
+                  {formErrors.message && (
+                    <span id="message-error" role="alert">
+                      {formErrors.message}
+                    </span>
+                  )}
                 </div>
 
                 <button type="submit">Send message</button>
                 {isSubmitted && (
-                  <p className="success-message">
+                  <p className="success-message" role="status">
                     Your message has been sent successfully.
                   </p>
                 )}

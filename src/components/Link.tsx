@@ -12,7 +12,7 @@ interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
 
 const StyledLink = styled.a``;
 
-const Link: FC<LinkProps> = ({ href, children, ...props }) => {
+const Link: FC<LinkProps> = ({ href, children, onClick, ...props }) => {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     if (href.startsWith("#")) {
       e.preventDefault();
@@ -30,6 +30,8 @@ const Link: FC<LinkProps> = ({ href, children, ...props }) => {
         });
       }
     }
+
+    onClick?.(e);
   };
 
   return (

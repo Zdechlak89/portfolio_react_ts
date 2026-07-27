@@ -12,6 +12,9 @@ const App = (): ReactElement => {
 
   return (
     <ModeContext.Provider value={{ darkMode, setDarkMode }}>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
       <Header></Header>
       <MainSection></MainSection>
     </ModeContext.Provider>
