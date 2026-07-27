@@ -12,6 +12,13 @@ header {
     position: fixed;
     writing-mode: vertical-lr;
     text-orientation: mixed;
+
+    a.active {
+      color: var(--color-accent-text);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
   }
   .header-links {
     bottom: 64px;
@@ -106,6 +113,13 @@ header {
 
         a {
           font-size: 1.75rem;
+
+          &.active {
+            color: var(--color-accent-text);
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+          }
         }
       }
 

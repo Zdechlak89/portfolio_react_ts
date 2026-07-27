@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./Header.scss";
 import { useModeContext } from "../store/app-context";
 import Link from "./Link";
@@ -19,12 +19,36 @@ const SOCIAL_LINKS = [
 function Header(): JSX.Element {
   const { darkMode, setDarkMode } = useModeContext();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("main");
 
   const switchDarkMode = (): void => {
     setDarkMode(!darkMode);
   };
 
   const closeMenu = (): void => setMenuOpen(false);
+
+  useEffect(() => {
+    const sections = NAV_LINKS.map((link) =>
+      document.getElementById(link.href.slice(1)),
+    ).filter((section): section is HTMLElement => section !== null);
+
+    if (sections.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: "-50% 0px -50% 0px", threshold: 0 },
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <>
@@ -43,11 +67,19 @@ function Header(): JSX.Element {
         </button>
 
         <nav aria-label="Primary">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href}>
-              {link.label}
-            </Link>
-          ))}
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={isActive ? "active" : undefined}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <ModeButton
@@ -79,11 +111,20 @@ function Header(): JSX.Element {
           aria-hidden={!menuOpen}
         >
           <nav aria-label="Mobile" className="mobile-menu__nav">
-            {NAV_LINKS.map((link) => (
-              <Link key={link.href} href={link.href} onClick={closeMenu}>
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = activeSection === link.href.slice(1);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMenu}
+                  className={isActive ? "active" : undefined}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="mobile-menu__socials">
