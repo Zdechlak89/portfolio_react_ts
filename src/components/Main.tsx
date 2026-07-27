@@ -271,7 +271,6 @@ const MainSection = (): ReactElement => {
                 </h1>
                 <div className="main-subheading">
                   <p>Web Developer</p>
-                  <p>Photographer</p>
                 </div>
               </div>
             </div>
@@ -346,9 +345,7 @@ const MainSection = (): ReactElement => {
                     >
                       ×
                     </button>
-                    <h3 className="skill-modal__title">
-                      {selectedSkill.name}
-                    </h3>
+                    <h3 className="skill-modal__title">{selectedSkill.name}</h3>
                     <p className="skill-modal__description">
                       {selectedSkill.description}
                     </p>
