@@ -1,10 +1,12 @@
 import styled from "styled-components";
+import lightModeIcon from "../assets/light_mode.svg";
+import darkModeIcon from "../assets/dark_mode.svg";
 
 const ModeButton = styled.button`
   top: 64px;
   right: 64px;
   position: fixed;
-  background-image: url("./light_mode_FILL0_wght400_GRAD0_opsz24.svg");
+  background-image: url(${lightModeIcon});
   background-position: center;
   background-repeat: no-repeat;
   background-color: transparent;
@@ -19,7 +21,7 @@ const ModeButton = styled.button`
   }
 
   .dark & {
-    background-image: url("./dark_mode_FILL0_wght400_GRAD0_opsz24.svg");
+    background-image: url(${darkModeIcon});
     filter: invert(90%);
   }
 

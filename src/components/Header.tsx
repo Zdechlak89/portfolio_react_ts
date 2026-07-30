@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactElement } from "react";
 import "./Header.scss";
 import { useModeContext } from "../store/app-context";
 import Link from "./Link";
@@ -12,11 +12,14 @@ const NAV_LINKS = [
 ];
 
 const SOCIAL_LINKS = [
-  { href: "https://www.instagram.com", label: "Instagram" },
-  { href: "https://www.linkedin.com", label: "LinkedIn" },
+  { href: "https://www.instagram.com/emilaugustynowicz/", label: "Instagram" },
+  {
+    href: "https://www.linkedin.com/in/emil-augustynowicz/",
+    label: "LinkedIn",
+  },
 ];
 
-function Header(): JSX.Element {
+const Header = (): ReactElement => {
   const { darkMode, setDarkMode } = useModeContext();
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("main");
@@ -85,9 +88,7 @@ function Header(): JSX.Element {
         <ModeButton
           className="mode"
           onClick={switchDarkMode}
-          aria-label={
-            darkMode ? "Switch to light mode" : "Switch to dark mode"
-          }
+          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
           aria-pressed={darkMode}
         ></ModeButton>
 
@@ -157,6 +158,6 @@ function Header(): JSX.Element {
       </header>
     </>
   );
-}
+};
 
 export default Header;

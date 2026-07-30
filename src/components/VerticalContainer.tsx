@@ -1,8 +1,5 @@
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect } from "react";
-
-gsap.registerPlugin(ScrollTrigger);
+import { gsap } from "../lib/gsap";
 
 function VerticalContainer() {
   useEffect(() => {

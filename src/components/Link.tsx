@@ -1,9 +1,6 @@
 import type { AnchorHTMLAttributes, FC, MouseEvent, ReactNode } from "react";
 import styled from "styled-components";
-import { gsap } from "gsap";
-import { ScrollToPlugin } from "gsap/ScrollToPlugin";
-
-gsap.registerPlugin(ScrollToPlugin);
+import { gsap } from "../lib/gsap";
 
 interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

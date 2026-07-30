@@ -3,32 +3,38 @@
   src: url("./assets/fonts/Montserrat/Montserrat-VariableFont_wght.ttf")
     format("truetype");
   font-weight: 100 900;
+  font-display: swap;
 }
 
 @font-face {
   font-family: "Hindi";
   src: url("./assets/fonts/Hind/Hind-Light.ttf") format("truetype");
   font-weight: 300;
+  font-display: swap;
 }
 @font-face {
   font-family: "Hindi";
   src: url("./assets/fonts/Hind/Hind-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-display: swap;
 }
 @font-face {
   font-family: "Hindi";
   src: url("./assets/fonts/Hind/Hind-Medium.ttf") format("truetype");
   font-weight: 500;
+  font-display: swap;
 }
 @font-face {
   font-family: "Hindi";
   src: url("./assets/fonts/Hind/Hind-SemiBold.ttf") format("truetype");
   font-weight: 600;
+  font-display: swap;
 }
 @font-face {
   font-family: "Hindi";
   src: url("./assets/fonts/Hind/Hind-Bold.ttf") format("truetype");
   font-weight: 700;
+  font-display: swap;
 }
 
 :root {
@@ -406,6 +412,7 @@ nav a {
 #main {
   position: relative;
   overflow: hidden;
+  height: 100vh;
 }
 
 .main {
@@ -438,6 +445,8 @@ nav a {
     width: 100%;
     max-width: 33vw;
     z-index: 1;
+    height: auto;
+    max-height: 90vh;
   }
 }
 
@@ -582,6 +591,10 @@ nav a {
   #contact {
     min-height: auto;
     padding-bottom: 60px;
+
+    .contact-intro {
+      order: -1;
+    }
   }
 
   .contact-form {
