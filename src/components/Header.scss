@@ -181,7 +181,7 @@ body.dark .mobile-menu {
 
   &[aria-checked="true"] {
     .mode-switch__track {
-      background: var(--color-accent);
+      background: var(--color-accent-dark);
     }
     .mode-switch__thumb {
       transform: translateX(20px);
