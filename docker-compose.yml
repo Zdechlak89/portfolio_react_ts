@@ -1,0 +1,24 @@
+services:
+  portfolio:
+    build: .
+    image: emil-portfolio:latest
+    container_name: portfolio
+    restart: unless-stopped
+    networks:
+      - caddy_net
+    # No "ports:" mapping — Caddy reaches this container over the shared
+    # network by its service/container name, nothing is exposed on the host.
+
+    # --- Option A: caddy-docker-proxy (routing via labels) ---
+    # Uncomment if your existing Caddy container is caddy-docker-proxy
+    # (i.e. it reads routing config from container labels, not a Caddyfile).
+    # labels:
+    #   caddy: cv.emilaugustynowicz.pl
+    #   caddy.reverse_proxy: "{{upstreams 80}}"
+
+networks:
+  caddy_net:
+    # Must match the network your existing Caddy container is attached to.
+    # Find it with: docker inspect <caddy_container> --format '{{json .NetworkSettings.Networks}}'
+    external: true
+    name: caddy_net
