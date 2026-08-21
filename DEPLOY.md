@@ -6,7 +6,7 @@ join the same Docker network and get one routing entry in Caddy.
 
 ## 1. Copy these files to the server
 
-```
+```text
 Dockerfile
 .dockerignore
 docker/nginx.conf
@@ -15,14 +15,11 @@ docker-compose.yml
 
 (or `git pull` if this repo is already on the server).
 
-## 2. Find your existing Caddy network
+## 2. Network
 
-```bash
-docker inspect <caddy_container_name> --format '{{json .NetworkSettings.Networks}}'
-```
-
-Edit `docker-compose.yml` and set `networks.caddy_net.name` to that network's
-actual name (rename the alias too if you'd rather call it something else).
+Already resolved: the existing Caddy container (`strona_portfolio-caddy-1`)
+sits on the `strona_portfolio_default` network, and `docker-compose.yml` is
+already set to join it — nothing to change here.
 
 ## 3. Point Caddy at the new container
 
@@ -31,7 +28,7 @@ Which of these applies depends on how your Caddy is set up — pick one:
 **A. Caddyfile mounted into the Caddy container**
 Add this block to the `Caddyfile` and reload/restart Caddy:
 
-```
+```caddyfile
 cv.emilaugustynowicz.pl {
     reverse_proxy portfolio:80
 }

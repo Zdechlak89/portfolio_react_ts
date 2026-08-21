@@ -18,7 +18,7 @@ services:
 
 networks:
   caddy_net:
-    # Must match the network your existing Caddy container is attached to.
-    # Find it with: docker inspect <caddy_container> --format '{{json .NetworkSettings.Networks}}'
+    # The strona_portfolio project's default network — its "caddy" service
+    # (container strona_portfolio-caddy-1) is already attached to this.
     external: true
-    name: caddy_net
+    name: strona_portfolio_default
