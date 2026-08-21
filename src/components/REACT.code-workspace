@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"path": "../../../.."
+		},
+		{
+			"name": "react-complete-guide-course-resources",
+			"path": "../../../../react-complete-guide-course-resources"
+		}
+	],
+	"settings": {}
+}

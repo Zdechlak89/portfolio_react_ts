@@ -1,6 +1,7 @@
 import { useEffect, useState, type ReactElement } from "react";
 import Header from "./components/Header";
 import MainSection from "./components/Main";
+import Footer from "./components/Footer";
 import { ModeContext } from "./store/app-context";
 
 const App = (): ReactElement => {
@@ -17,6 +18,7 @@ const App = (): ReactElement => {
       </a>
       <Header></Header>
       <MainSection></MainSection>
+      <Footer></Footer>
     </ModeContext.Provider>
   );
 };
