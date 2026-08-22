@@ -4,7 +4,6 @@ import {
   type FormEvent,
   type ReactElement,
 } from "react";
-import Section from "./Section";
 
 type FormInputElement = HTMLInputElement | HTMLTextAreaElement;
 
@@ -95,88 +94,86 @@ const ContactSection = (): ReactElement => {
   };
 
   return (
-    <Section id="contact">
-      <div className="container">
-        <div className="col col-sm-5">
-          <h2>Contact</h2>
-          <p className="form-hint">All fields are required.</p>
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
-            <div className="form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                required
-                aria-required="true"
-                aria-invalid={Boolean(formErrors.name)}
-                aria-describedby={formErrors.name ? "name-error" : undefined}
-                value={formValues.name}
-                onChange={handleInputChange}
-              />
-              {formErrors.name && (
-                <span id="name-error" role="alert">
-                  {formErrors.name}
-                </span>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-                aria-required="true"
-                aria-invalid={Boolean(formErrors.email)}
-                aria-describedby={
-                  formErrors.email ? "email-error" : undefined
-                }
-                value={formValues.email}
-                onChange={handleInputChange}
-              />
-              {formErrors.email && (
-                <span id="email-error" role="alert">
-                  {formErrors.email}
-                </span>
-              )}
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                rows={5}
-                required
-                aria-required="true"
-                aria-invalid={Boolean(formErrors.message)}
-                aria-describedby={
-                  formErrors.message ? "message-error" : undefined
-                }
-                value={formValues.message}
-                onChange={handleInputChange}
-              />
-              {formErrors.message && (
-                <span id="message-error" role="alert">
-                  {formErrors.message}
-                </span>
-              )}
-            </div>
-
-            <button type="submit">Send message</button>
-            {isSubmitted && (
-              <p className="success-message" role="status">
-                Your message has been sent successfully.
-              </p>
+    <section id="contact" className="section-inner">
+      <span className="eyebrow">03 — Contact</span>
+      <h2>Let&rsquo;s create something great</h2>
+      <div className="contact-layout">
+        <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              autoComplete="name"
+              required
+              aria-required="true"
+              aria-invalid={Boolean(formErrors.name)}
+              aria-describedby={formErrors.name ? "name-error" : undefined}
+              value={formValues.name}
+              onChange={handleInputChange}
+            />
+            {formErrors.name && (
+              <span id="name-error" role="alert">
+                {formErrors.name}
+              </span>
             )}
-          </form>
-        </div>
-        <div className="col col-sm-5 col-offset-sm-2 contact-intro">
-          <h2>Let&rsquo;s create something great</h2>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              autoComplete="email"
+              required
+              aria-required="true"
+              aria-invalid={Boolean(formErrors.email)}
+              aria-describedby={formErrors.email ? "email-error" : undefined}
+              value={formValues.email}
+              onChange={handleInputChange}
+            />
+            {formErrors.email && (
+              <span id="email-error" role="alert">
+                {formErrors.email}
+              </span>
+            )}
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              required
+              aria-required="true"
+              aria-invalid={Boolean(formErrors.message)}
+              aria-describedby={
+                formErrors.message ? "message-error" : undefined
+              }
+              value={formValues.message}
+              onChange={handleInputChange}
+            />
+            {formErrors.message && (
+              <span id="message-error" role="alert">
+                {formErrors.message}
+              </span>
+            )}
+          </div>
+
+          <div className="contact-form__submit-row">
+            <button type="submit">Send message</button>
+            <p className="form-hint">All fields are required.</p>
+          </div>
+          {isSubmitted && (
+            <p className="success-message" role="status">
+              Your message has been sent successfully.
+            </p>
+          )}
+        </form>
+        <div className="contact-intro">
           <p>
             I can&rsquo;t wait to dive into a new project — there&rsquo;s
             nothing quite like turning a blank page into something people
@@ -188,9 +185,21 @@ const ContactSection = (): ReactElement => {
             Let&rsquo;s talk about how we can bring your idea to life — drop
             me a message and I&rsquo;ll get back to you soon.
           </p>
+          <div className="contact-intro__links">
+            <a href="mailto:emilaugustynowicz@gmail.com">
+              emilaugustynowicz@gmail.com
+            </a>
+            <a
+              href="https://www.linkedin.com/in/emil-augustynowicz/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              linkedin.com/in/emil-augustynowicz
+            </a>
+          </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

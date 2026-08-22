@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("Home page", () => {
-  test("renders hero, scrolls to Story via nav, shows skills with star ratings", async ({
+  test("renders hero, scrolls to Story via nav, and shows skill tiers", async ({
     page,
   }) => {
     await page.goto("/");
@@ -15,60 +15,41 @@ test.describe("Home page", () => {
 
     await page.locator("#skills").scrollIntoViewIfNeeded();
 
-    const jsTag = page.locator(".tech-stack__item", { hasText: "JavaScript" });
-    await expect(jsTag).toBeVisible();
-    await expect(jsTag.locator(".tech-stack__star--filled")).toHaveCount(5);
+    const everyDayTier = page.locator(".skill-tier", {
+      hasText: "Every day",
+    });
+    await expect(everyDayTier).toBeVisible();
+    await expect(
+      everyDayTier.locator(".skill-tier__item", { hasText: "JavaScript" }),
+    ).toBeVisible();
   });
 
-  test("opens and closes the skill modal when a skill pill is clicked", async ({
+  test("scrolls the story rail with the next/previous buttons", async ({
     page,
   }) => {
     await page.goto("/");
 
-    await page.locator("#skills").scrollIntoViewIfNeeded();
+    await page.locator("#story").scrollIntoViewIfNeeded();
 
-    const jsTag = page.locator(".tech-stack__item", { hasText: "JavaScript" });
-    await jsTag.click();
+    const rail = page.locator(".story__rail");
+    const initialScrollLeft = await rail.evaluate((el) => el.scrollLeft);
 
-    const modal = page.locator(".skill-modal");
-    await expect(modal).toBeVisible();
-    await expect(modal.locator(".skill-modal__title")).toHaveText(
-      "JavaScript",
-    );
-    await expect(modal.locator(".skill-modal__description")).toBeVisible();
-
-    await page.locator(".skill-modal__close").click();
-    await expect(modal).toBeHidden();
-  });
-
-  test("closes the skill modal when clicking the overlay", async ({
-    page,
-  }) => {
-    await page.goto("/");
-
-    await page.locator("#skills").scrollIntoViewIfNeeded();
-
-    await page
-      .locator(".tech-stack__item", { hasText: "React" })
-      .click();
-
-    const modal = page.locator(".skill-modal");
-    await expect(modal).toBeVisible();
-
-    await page.locator(".skill-modal-overlay").click({ position: { x: 5, y: 5 } });
-    await expect(modal).toBeHidden();
+    await page.getByRole("button", { name: "Next role" }).click();
+    await expect
+      .poll(() => rail.evaluate((el) => el.scrollLeft))
+      .toBeGreaterThan(initialScrollLeft);
   });
 });
 
 test.describe("Mobile header layout (<=600px)", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("collapses nav to horizontal layout and hides the social links column", async ({
+  test("collapses nav to horizontal layout and hides the rail", async ({
     page,
   }) => {
     await page.goto("/");
 
-    await expect(page.locator("header nav")).toHaveCSS(
+    await expect(page.locator(".mobile-menu__nav")).toHaveCSS(
       "writing-mode",
       "horizontal-tb",
     );

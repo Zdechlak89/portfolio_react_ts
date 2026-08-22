@@ -10,7 +10,7 @@
     gap: 1.5rem;
     padding: 2rem var(--side-margin) 2.5rem;
     text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-top: 1px solid var(--color-border);
 
     &__contact,
     &__socials {
@@ -20,28 +20,16 @@
       gap: 0.5rem;
     }
 
-    a {
-      font-size: 1rem;
-
-      &:has(~ a:hover) {
-        color: rgb(0, 0, 0);
-      }
-      &:hover ~ a {
-        color: rgb(0, 0, 0);
-      }
+    &__contact a {
+      font-family: var(--font-mono);
+      font-size: 0.9375rem;
+      color: var(--color-ink);
     }
-  }
-}
 
-body.dark .mobile-footer {
-  border-top-color: rgba(255, 255, 255, 0.15);
-
-  a {
-    &:has(~ a:hover) {
-      color: var(--color-light);
-    }
-    &:hover ~ a {
-      color: var(--color-light);
+    &__socials a {
+      font-family: var(--font-mono);
+      font-size: 0.8125rem;
+      color: var(--color-muted);
     }
   }
 }

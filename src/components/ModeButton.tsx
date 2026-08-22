@@ -3,31 +3,26 @@ import lightModeIcon from "../assets/light_mode.svg";
 import darkModeIcon from "../assets/dark_mode.svg";
 
 const ModeButton = styled.button`
-  top: 64px;
-  right: 64px;
-  position: fixed;
+  position: static;
   background-image: url(${lightModeIcon});
   background-position: center;
   background-repeat: no-repeat;
+  background-size: 18px;
   background-color: transparent;
-  border: 0 none;
-  width: 44px;
-  height: 44px;
-  z-index: 9;
+  border: 1px solid var(--color-border-strong);
+  border-radius: 2px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
 
   &:hover {
-    background-color: #80808080;
-    cursor: pointer;
+    background-color: var(--color-surface-muted);
+    border-color: var(--color-ink);
   }
 
   .dark & {
     background-image: url(${darkModeIcon});
     filter: invert(90%);
-  }
-
-  @media (max-width: 600px) {
-    top: 24px;
-    right: 20px;
   }
 `;
 export default ModeButton;

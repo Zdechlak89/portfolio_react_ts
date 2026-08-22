@@ -1,137 +1,79 @@
 import { useEffect, useRef, type ReactElement } from "react";
 import { gsap } from "../lib/gsap";
-import Section from "./Section";
 import { splitTextIntoWords } from "../utils/textAnimation";
 
+const STATS = [
+  { value: "10 yrs", label: "Commercial work" },
+  { value: "5", label: "Companies" },
+  { value: "AEM", label: "Core specialism" },
+];
+
 const HeroSection = (): ReactElement => {
-  const mainSectionRef = useRef<HTMLElement>(null);
-  const mainTextRef = useRef<HTMLDivElement>(null);
-  const mainImageRef = useRef<HTMLImageElement>(null);
+  const textContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = mainSectionRef.current;
-    const textContainer = mainTextRef.current;
-    const image = mainImageRef.current;
-
-    if (!section || !textContainer || !image) return;
+    const textContainer = textContainerRef.current;
+    if (!textContainer) return;
 
     const heading = textContainer.querySelector("h1");
-    const paragraphs = textContainer.querySelectorAll("p");
-
     if (!heading) return;
 
-    // Animate heading words from bottom to top
     const headingWords = heading.querySelectorAll(".word");
-    const headingTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainTextRef.current,
-        start: "top center",
-        end: "top center",
-      },
-    });
+    gsap.set(headingWords, { opacity: 0, y: 24 });
 
-    headingWords.forEach((word) => {
-      gsap.set(word, {
-        opacity: 0,
-        y: 30,
-      });
-    });
-
-    headingWords.forEach((word) => {
-      headingTimeline.to(
-        word,
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        0,
-      );
-    });
-
-    // Animate paragraph words from left to right
-    const paraTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: mainTextRef.current,
-        start: "top center",
-        end: "top center",
-      },
-    });
-
-    paragraphs.forEach((para) => {
-      gsap.set(para, {
-        opacity: 0,
-        x: -100,
-      });
-
-      paraTimeline.to(
-        para,
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-        1.2,
-      );
-    });
-
-    const textScroll = gsap.to(textContainer, {
-      y: -80,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      },
-    });
-
-    const imageScroll = gsap.to(image, {
-      y: -410,
-      ease: "none",
-      scrollTrigger: {
-        trigger: section,
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-      },
+    const timeline = gsap.to(headingWords, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.06,
+      ease: "power2.out",
     });
 
     return () => {
-      headingTimeline.kill();
-      paraTimeline.kill();
-      textScroll.kill();
-      imageScroll.kill();
+      timeline.kill();
     };
   }, []);
 
   return (
-    <Section id="main" ref={mainSectionRef}>
-      <div className="container">
-        <div className="col col-lg-7">
-          <div className="main-text" ref={mainTextRef}>
-            <h1 className="main-heading">
-              {splitTextIntoWords("Emil Augustynowicz")}
-            </h1>
-            <div className="main-subheading">
-              <p>Web Developer</p>
-            </div>
+    <section id="main">
+      <div className="hero">
+        <div className="hero__copy" ref={textContainerRef}>
+          <div className="hero__status">
+            <span className="hero__status-dot" aria-hidden="true"></span>
+            <span>Open to full-time and B2B · Lublin, Poland · Remote</span>
+          </div>
+          <h1 className="main-heading">
+            {splitTextIntoWords("Emil Augustynowicz")}
+          </h1>
+          <p className="hero__lede">
+            Frontend developer, ten years in. I build and maintain large
+            content platforms — banking, pharma, e-commerce — mostly in
+            JavaScript, React and AEM.
+          </p>
+          <div className="hero__actions">
+            <a href="#contact" className="hero__cta">
+              Get in touch
+            </a>
+          </div>
+          <div className="hero__stats">
+            {STATS.map((stat) => (
+              <div className="hero__stat" key={stat.label}>
+                <span className="hero__stat-value">{stat.value}</span>
+                <span className="hero__stat-label">{stat.label}</span>
+              </div>
+            ))}
           </div>
         </div>
-        <div className="col col-lg-5 main-image-container">
+        <div className="hero__portrait">
           <img
-            ref={mainImageRef}
             src="/DAD_0409.jpg"
-            className="main-image"
             alt="Emil Augustynowicz photo"
             width={3198}
             height={4446}
           />
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
 

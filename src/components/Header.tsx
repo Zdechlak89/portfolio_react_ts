@@ -54,22 +54,26 @@ const Header = (): ReactElement => {
   }, []);
 
   return (
-    <>
-      <header>
-        <button
-          type="button"
-          className="hamburger"
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          <span className="hamburger__bar"></span>
-          <span className="hamburger__bar"></span>
-          <span className="hamburger__bar"></span>
-        </button>
+    <header>
+      <button
+        type="button"
+        className="hamburger"
+        aria-expanded={menuOpen}
+        aria-controls="mobile-menu"
+        aria-label={menuOpen ? "Close menu" : "Open menu"}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        <span className="hamburger__bar"></span>
+        <span className="hamburger__bar"></span>
+        <span className="hamburger__bar"></span>
+      </button>
 
-        <nav aria-label="Primary">
+      <div className="rail">
+        <span className="rail__monogram" aria-hidden="true">
+          EA
+        </span>
+
+        <nav className="rail__nav" aria-label="Primary">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.slice(1);
             return (
@@ -85,14 +89,54 @@ const Header = (): ReactElement => {
           })}
         </nav>
 
-        <ModeButton
-          className="mode"
-          onClick={switchDarkMode}
-          aria-label={darkMode ? "Switch to light mode" : "Switch to dark mode"}
-          aria-pressed={darkMode}
-        ></ModeButton>
+        <div className="rail__foot">
+          <ModeButton
+            onClick={switchDarkMode}
+            aria-label={
+              darkMode ? "Switch to light mode" : "Switch to dark mode"
+            }
+            aria-pressed={darkMode}
+          ></ModeButton>
 
-        <div className="header-links">
+          <div className="rail__socials">
+            {SOCIAL_LINKS.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {link.label}
+                <span className="visually-hidden"> (opens in a new tab)</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div
+        id="mobile-menu"
+        className={`mobile-menu${menuOpen ? " mobile-menu--open" : ""}`}
+        aria-hidden={!menuOpen}
+      >
+        <nav aria-label="Mobile" className="mobile-menu__nav">
+          {NAV_LINKS.map((link) => {
+            const isActive = activeSection === link.href.slice(1);
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                className={isActive ? "active" : undefined}
+                aria-current={isActive ? "page" : undefined}
+              >
+                {link.label}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="mobile-menu__socials">
           {SOCIAL_LINKS.map((link) => (
             <a
               key={link.href}
@@ -106,57 +150,20 @@ const Header = (): ReactElement => {
           ))}
         </div>
 
-        <div
-          id="mobile-menu"
-          className={`mobile-menu${menuOpen ? " mobile-menu--open" : ""}`}
-          aria-hidden={!menuOpen}
+        <button
+          type="button"
+          role="switch"
+          aria-checked={darkMode}
+          className="mode-switch"
+          onClick={switchDarkMode}
         >
-          <nav aria-label="Mobile" className="mobile-menu__nav">
-            {NAV_LINKS.map((link) => {
-              const isActive = activeSection === link.href.slice(1);
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className={isActive ? "active" : undefined}
-                  aria-current={isActive ? "page" : undefined}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </nav>
-
-          <div className="mobile-menu__socials">
-            {SOCIAL_LINKS.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {link.label}
-                <span className="visually-hidden"> (opens in a new tab)</span>
-              </a>
-            ))}
-          </div>
-
-          <button
-            type="button"
-            role="switch"
-            aria-checked={darkMode}
-            className="mode-switch"
-            onClick={switchDarkMode}
-          >
-            <span>Dark mode</span>
-            <span className="mode-switch__track">
-              <span className="mode-switch__thumb"></span>
-            </span>
-          </button>
-        </div>
-      </header>
-    </>
+          <span>Dark mode</span>
+          <span className="mode-switch__track">
+            <span className="mode-switch__thumb"></span>
+          </span>
+        </button>
+      </div>
+    </header>
   );
 };
 
