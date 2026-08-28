@@ -15,6 +15,7 @@ const ModeContext = createContext<ModeContextValue>({
   setDarkMode: () => {},
 });
 
+// eslint-disable-next-line react-refresh/only-export-components -- context + hook module, not a component
 export const useModeContext = (): ModeContextValue => useContext(ModeContext);
 
 export { ModeContext };
