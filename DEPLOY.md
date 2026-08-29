@@ -42,6 +42,15 @@ Then it polls `https://cv.emilaugustynowicz.pl` for a `200 OK` as a smoke test.
 The deploy user needs permission to run `docker` (in the `docker` group) and
 write access to `DEPLOY_PATH`.
 
+### GitLab CI/CD
+
+`.gitlab-ci.yml` is the same pipeline for GitLab-hosted mirrors: `lint`,
+`build`, `unit`, and `e2e` in the `test` stage, then `deploy` on the default
+branch (SSH → `git reset --hard` → `docker compose up -d --build` → smoke
+test). Add the same values as **Settings → CI/CD → Variables**, each *Masked*
+and *Protected*: `SSH_HOST`, `SSH_USER`, `SSH_PRIVATE_KEY`, `SSH_PORT`
+(optional), `DEPLOY_PATH`.
+
 ## Manual
 
 This repo now builds into a static site served by nginx in Docker. You have an

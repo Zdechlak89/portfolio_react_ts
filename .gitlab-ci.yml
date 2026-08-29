@@ -1,0 +1,110 @@
+# GitLab CI/CD — mirror of .github/workflows/ci-cd.yml
+#
+# Pipeline: lint -> typecheck/build -> unit (Vitest) -> e2e (Playwright),
+# then on the default branch deploy over SSH (git pull + docker compose up)
+# and smoke-test production.
+#
+# Required CI/CD variables (Settings -> CI/CD -> Variables), all Masked,
+# and Protected so they only expose on the protected default branch:
+#   SSH_HOST         57.128.218.231
+#   SSH_USER         deploy user on the server
+#   SSH_PRIVATE_KEY  private half of the dedicated deploy key (File or Var)
+#   SSH_PORT         optional, defaults to 22
+#   DEPLOY_PATH      absolute path to the repo checkout on the server
+
+stages: [test, deploy]
+
+# Run one pipeline per change: merge requests, the default branch, and tags.
+# Without this you get duplicate branch+MR pipelines on every push.
+workflow:
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    - if: '$CI_COMMIT_TAG'
+
+default:
+  image: node:20-alpine
+
+variables:
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+# Shared between jobs, rebuilt only when the lockfile changes.
+cache:
+  key:
+    files: [package-lock.json]
+  paths:
+    - .npm/
+    - node_modules/
+
+.install: &install
+  - npm ci --cache .npm --prefer-offline
+
+lint:
+  stage: test
+  script:
+    - *install
+    - npm run lint
+
+build:
+  stage: test
+  script:
+    - *install
+    - npm run build          # tsc (typecheck) && vite build
+  artifacts:
+    paths: [dist/]
+    expire_in: 1 week
+
+unit:
+  stage: test
+  script:
+    - *install
+    - npm run test           # vitest run
+
+e2e:
+  stage: test
+  image: mcr.microsoft.com/playwright:v1.61.1-jammy
+  variables:
+    CI: "true"
+  script:
+    - npm ci --cache .npm --prefer-offline
+    - npm run test:e2e       # playwright test (starts `npm run dev` itself)
+  artifacts:
+    when: on_failure
+    paths: [playwright-report/]
+    expire_in: 1 week
+
+deploy:
+  stage: deploy
+  image: alpine:3.20
+  environment:
+    name: production
+    url: https://cv.emilaugustynowicz.pl
+  resource_group: production   # never two deploys at once
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  cache: []                    # deploy needs no node_modules
+  before_script:
+    - apk add --no-cache openssh-client curl
+    - eval "$(ssh-agent -s)"
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
+    - mkdir -p ~/.ssh && chmod 700 ~/.ssh
+    - ssh-keyscan -p "${SSH_PORT:-22}" "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+  script:
+    - |
+      ssh -p "${SSH_PORT:-22}" "$SSH_USER@$SSH_HOST" "
+        set -euo pipefail
+        cd '$DEPLOY_PATH'
+        git fetch origin master
+        git reset --hard origin/master
+        docker compose up -d --build --remove-orphans
+        docker image prune -f
+      "
+    - |
+      for i in $(seq 1 10); do
+        code=$(curl -s -o /dev/null -w "%{http_code}" https://cv.emilaugustynowicz.pl || echo 000)
+        if [ "$code" = "200" ]; then echo "Site responded 200 OK"; exit 0; fi
+        echo "Attempt $i: got HTTP $code, retrying in 5s..."
+        sleep 5
+      done
+      echo "Site did not return 200 OK after deploy" >&2
+      exit 1

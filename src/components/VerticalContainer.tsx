@@ -24,7 +24,15 @@ const STORY: Job[] = [
       "Writing unit tests as well as scenarios in Playwright.",
       "Part of an international team, working in Scrum.",
     ],
-    stack: ["JavaScript", "React", "Sass", "Webpack", "Jest", "AEM 6.5"],
+    stack: [
+      "JavaScript",
+      "React",
+      "Sass",
+      "Webpack",
+      "Jest",
+      "AEM 6.5",
+      "CI/CD",
+    ],
   },
   {
     num: "02",
@@ -38,7 +46,7 @@ const STORY: Job[] = [
       "Daily cooperation with other teams; recruiting developers.",
       "Plus responsibilities from the previous role.",
     ],
-    stack: ["Vue.js", "Sass", "Webpack", "AEM"],
+    stack: ["Vue.js", "Sass", "Webpack", "AEM", "CI/CD"],
   },
   {
     num: "03",
@@ -52,7 +60,15 @@ const STORY: Job[] = [
       "Developing JS features and component structure; creating styles and animations.",
       "Taking part in creating UX/UI design by external agencies; code reviewing.",
     ],
-    stack: ["JavaScript", "TypeScript", "jQuery", "Sass", "Webpack", "Cypress", "AEM"],
+    stack: [
+      "JavaScript",
+      "TypeScript",
+      "jQuery",
+      "Sass",
+      "Webpack",
+      "Cypress",
+      "AEM",
+    ],
   },
   {
     num: "04",

@@ -16,12 +16,21 @@ const TIERS: SkillTier[] = [
   {
     label: "Confident",
     note: "Shipped in production projects.",
-    items: ["Playwright", "Cypress", "Jest", "Webpack", "Vue.js"],
+    items: [
+      "Playwright",
+      "Cypress",
+      "Jest",
+      "Webpack",
+      "Vue.js",
+      "CI/CD",
+      "TailwindCSS",
+      "Node.js",
+    ],
   },
   {
     label: "Familiar",
     note: "Used where the project needed it.",
-    items: ["Node.js", "Docker", "Vite", "PHP"],
+    items: ["Docker", "Vite", "PHP"],
   },
 ];
 
